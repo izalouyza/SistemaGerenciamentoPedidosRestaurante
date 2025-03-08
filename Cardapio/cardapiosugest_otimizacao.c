@@ -9,7 +9,7 @@ char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
 
 typedef struct{
 	char nome[20];
-    char descri[50];
+     	char descri[50];
 	float preco;
 	categoria catego;
 } item;
