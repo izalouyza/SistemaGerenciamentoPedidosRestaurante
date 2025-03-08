@@ -1,79 +1,71 @@
 #include <stdio.h>
 #include <locale.h>
-#include <string.h>
 
-#define max 10 // Total de itens
+#define max 10 //Total de itens
 
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
 char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
 
-typedef struct {
-    char nome[20];
+typedef struct{
+	char nome[20];
     char descri[50];
-    float preco;
-    categoria catego;
+	float preco;
+	categoria catego;
 } item;
 
-item cardapio[max]; // Guardar itens do cardápio
+item cardapio[max]; //guardar itens do cardapio
 int codigo = 0;
 
-void exibir_card() {
-    if (codigo > 0) {
-        puts("\n=================== Cardápio ===================");
-        puts("Código - Nome - Descrição - Preço R$ - Categoria");
-        puts("================================================");
-        for (int i = 0; i < codigo; i++) {
-            printf("%d - %s - %s ........ %.2f - %s\n", i + 1, cardapio[i].nome, cardapio[i].descri, cardapio[i].preco, categs[cardapio[i].catego]);
-        }
-        puts("================================================\n");
-    } else {
-        puts("Nenhum item cadastrado ainda.\n");
-    }
+void exibir_card(){ //exibir o cardápio
+	if(codigo > 0){
+		printf("\n=================== Cardápio ===================\n");
+		printf("Código - Nome - Descrição - Preço R$ - Categoria\n");
+		printf("================================================\n");
+		for(int i = 0; i < codigo; i++){
+			printf("%d - %s - %s ........ %.2f - %s\n", i+1, cardapio[i].nome, cardapio[i].descri, cardapio[i].preco, categs[cardapio[i].catego]);
+		}
+		printf("================================================\n\n");
+	} else{
+		printf("Nenhum item cadastrado ainda.\n\n");
+	}
 }
 
-void cadastro_card(item *p) {
-    getchar(); // Limpar o buffer do teclado
-
-    printf("Digite o nome do item: ");
-    fgets(p->nome, sizeof(p->nome), stdin);
-    p->nome[strcspn(p->nome, "\n")] = '\0'; // Remover '\n'
-
-    printf("Digite a descrição [max.: 50 letras]: ");
-    fgets(p->descri, sizeof(p->descri), stdin);
-    p->descri[strcspn(p->descri, "\n")] = '\0'; // Remover '\n'
-
-    printf("Digite o preço em R$: ");
-    scanf("%f", &p->preco);
-
-    int n = 0;
-    puts("Digite o número correspondente à categoria:");
-    puts("(1) Entrada\n(2) Principal\n(3) Sobremesa\n(4) Bebida");
-    
-    while (n < 1 || n > 4) {
-        scanf("%d", &n);
-        if (n < 1 || n > 4) {
-            puts("Número inválido, tente novamente.");
-        }
-    }
-
-    p->catego = (categoria)(n - 1);
+void cadastro_card(item *p){ //cadastrar e atualizar itens do card pio
+	getchar(); //limpar o buffer
+	printf("Digite o nome do item: "); 
+	gets(p->nome);
+	printf("Digite a descrição [max.: 50 letras]: ");
+	gets(p->descri);
+	printf("Digite o preço em R$: ");
+	scanf("%f", &p->preco);
+	int n = 0;
+	printf("Digite o número correspondente a categoria: \n");
+	printf("(1) Entrada\n(2) Principal\n(3) Sobremesa\n(4) Bebida\n");
+	while (n < 1 || n > 4){
+		scanf("%d", &n);
+		if (n < 1 || n > 4){
+			printf("Número inválido, tente novamente.\n\n");
+		}
+	}
+	n--;
+	p->catego = (categoria)n;
 }
 
-void remover_card() {
-    int num;
-    printf("Digite o código do item que deseja remover: ");
-    scanf("%d", &num);
-    num--;
+void remover_card(){
+	int num = 0;
+	printf("Digite o código do item que deseja remover: ");
+	scanf("%d", &num);
+	num--;
 
-    if (num >= 0 && num < codigo) {
-        for (int i = num; i < codigo - 1; i++) {
-            cardapio[i] = cardapio[i + 1];
-        }
-        codigo--;
-        puts("Item removido com sucesso!\n");
-    } else {
-        puts("Código inválido, tente novamente!\n");
-    }
+	if(num >= 0 || num < codigo){
+		for(int i = num; i < codigo; i++){ //removedor
+			cardapio[i] = cardapio[i+1];
+		}
+		codigo--;
+		printf("Item removido com sucesso!\n\n");
+	}else{
+		printf("Código inválido, tente novamente!\n\n");
+	}
 }
 
 int main() {
