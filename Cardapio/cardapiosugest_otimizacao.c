@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <locale.h>
+#include<stdio.h>
+#include<locale.h>
+#include<stdlib.h>
 
 #define max 10 //Total de itens
 
