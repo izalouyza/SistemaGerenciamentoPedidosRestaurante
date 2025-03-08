@@ -77,7 +77,7 @@ void remover_card() {
 }
 
 int main() {
-    setlocale(LC_ALL, "pt_BR.UTF-8");
+    setlocale(LC_ALL, "portuguese");
 
     int opcion = 0;
     int num;
