@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define max 10 // Total de itens no cardápio
+// Total de itens no cardápio
+#define max 10 
 
 // Enum de categorias do cardápio
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
@@ -260,10 +261,10 @@ int main() {
                 alterar_status();
                 break;
             case 8: // Sair
-                printf("Saindo...\n");
+                printf("Obrigado, volte sempre!\n");
                 break;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Número inválido, tente novamente!\n");
                 break;
         }
     }
