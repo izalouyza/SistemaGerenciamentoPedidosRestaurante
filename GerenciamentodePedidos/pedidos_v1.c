@@ -260,10 +260,10 @@ int main() {
                 alterar_status();
                 break;
             case 8: // Sair
-                printf("Saindo...\n");
+                printf("Obrigado, volte sempre!\n");
                 break;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Número inválido, tente novamente!\n");
                 break;
         }
     }
