@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define max 10 // Total de itens no cardápio
+// Total de itens no cardápio
+#define max 10 
 
 // Enum de categorias do cardápio
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
