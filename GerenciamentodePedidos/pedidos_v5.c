@@ -46,7 +46,6 @@ void exibir_card() {
         for(int i = 0; i < codigo; i++) {
             printf("%-10d %-20s %-40s %-15.2f %-10s\n", i + 1, cardapio[i].nome, cardapio[i].descri, cardapio[i].preco, categs[cardapio[i].catego]);
         }
-        
         printf("___________________________________________________________________________________________________________\n\n");
     } else {
         printf(">> Nenhum item cadastrado.\n\n");
@@ -160,7 +159,6 @@ void criar_pedido_menu() {
             // Receber os itens do pedido
             for (int i = 0; i < num_itens_pedido; i++) {
                 int codigo_item;
-                
                 while(1){
                     printf("Código do item %d do pedido: ", i + 1);
                     if(scanf("%d", &codigo_item) != 1){
@@ -171,7 +169,6 @@ void criar_pedido_menu() {
                         break;
                     }else{
                         printf(">> Código inválido, tente novamente.\n");
-                        i--; // Tentar novamente o mesmo item
                     }
                 }
             }
@@ -372,7 +369,8 @@ void remover_pedido() {
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int opcion = 0;
-    while (opcion != 10) {  // Altera para 10 para incluir as novas opções
+    int opc = 0;
+    while (1) {  // Altera para 10 para incluir as novas opções
         printf("\n=========================================== Gerenciamento do Restaurante ===================================\n\n");
         printf("(1) Cadastrar item \n(2) Exibir cardápio\n(3) Atualizar cardápio\n(4) Remover itens do cardápio\n");
         printf("(5) Criar pedido\n(6) Gerenciar pedidos\n(7) Alterar status de pedidos\n(8) Alterar pedido\n(9) Remover pedido\n(10) Sair\n\n");
@@ -385,7 +383,6 @@ int main() {
                 break;
             }
         }
-    
     switch (opcion) {
         case 1: // Cadastrar itens no cardápio
             if (codigo < max) {
@@ -447,7 +444,21 @@ int main() {
             remover_pedido();
             break;
         case 10:
-            printf(">> Obrigado, volte sempre!\n");
+            while(1){
+                printf(">> Tem certeza que deseja sair?\n[1] Sim\n[0] Não\n");
+                if(scanf("%d", &opc) != 1){
+                    printf("Valor inválido. Por favor, insira um número válido.\n");
+                    while(getchar() != '\n');    
+                }else if(opc < 0 || opc > 1){
+                    printf("Opção inválida, tente novamente.\n");
+                }else{
+                    break;
+                }
+            }
+            if(opc == 1){
+                printf(">> Obrigado, volte sempre!\n");
+                return 0;
+            }
             break;
         default:
             printf(">> Número inválido, tente novamente.\n");
