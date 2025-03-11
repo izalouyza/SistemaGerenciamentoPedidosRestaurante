@@ -229,6 +229,7 @@ void gerenciar_pedidos() {
 }
 
 // Função para alterar o status do pedido
+// Função para alterar o status do pedido
 void alterar_status() {
     if (num_pedidos > 0) {
         printf("\n>> Preencha com as informações do pedido que deseja atualizar.\n");
@@ -257,6 +258,11 @@ void alterar_status() {
         }
         pedidos[cod_pedido].status = (StatusPedido)(opcao - 1);
         printf("Status do pedido %d alterado para: %s\n", cod_pedido + 1, status_para_string(pedidos[cod_pedido].status));
+
+        // Verifica se o status foi alterado para "Entregue"
+        if (pedidos[cod_pedido].status == ENTREGUE) {
+            printf(">> Pedido %d foi finalizado e entregue ao cliente!\n", cod_pedido + 1);
+        }
     } else {
         printf(">> Nenhum pedido cadastrado no momento.\n\n");
     }
