@@ -143,7 +143,7 @@ void criar_pedido_menu() {
         while(1) {
             printf("Quantidade de itens: ");
             if(scanf("%d", &num_itens_pedido) != 1 || num_itens_pedido <= 0 || num_itens_pedido > codigo) {
-                printf("Valor inválido. Por favor, insira um número válido.", codigo);
+                printf("Valor inválido. Por favor, insira um número válido.\n", codigo);
                 while(getchar() != '\n');
             } else {
                 break;
