@@ -3,13 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Enum para status dos pedidos
-typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
+#define max 10 
 
 // Enumeração de categorias do cardápio
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
-const char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
-const char* strings[] = {"Código", "Nome", "Descrição", "Preço R$", "Categoria"};
+char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
+char* strings[] = {"Código", "Nome", "Descrição", "Preço R$", "Categoria"};
 
 // Struct para representar um item do cardápio
 typedef struct {
@@ -19,12 +18,15 @@ typedef struct {
     categoria catego;
 } item;
 
+// Enum para status dos pedidos
+typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
+
 // Struct para representar um pedido
 typedef struct {
     int cod_pedido;          // Identificador do pedido
     char nome_cliente[100];  // Nome do cliente
-    item* itens;             // Armazenar os itens do pedido
-    int num_itens;           // Número de itens no pedido
+    item* itens;            // Armazenar os itens do pedido
+    int num_itens;          // Número de itens no pedido
     StatusPedido status;     // Status do pedido
 } Pedido;
 
@@ -53,7 +55,7 @@ void exibir_card() {
 }
 
 // Função para cadastrar itens no cardápio
-void cadastro_card(item *p) {
+void cadastro_card(item *p) { // Cadastrar e atualizar itens do cardápio
     getchar(); // Limpar o buffer
     printf("Nome do item: "); 
     fgets(p->nome, sizeof(p->nome), stdin);
@@ -63,23 +65,27 @@ void cadastro_card(item *p) {
     fgets(p->descri, sizeof(p->descri), stdin);
     p->descri[strcspn(p->descri, "\n")] = 0; // Remover a quebra de linha
 
-    while (1) {
+    while (1) {  // Repetição até um preço válido ser inserido
         printf("Preço em R$: ");
-        if (scanf("%f", &p->preco) != 1 || p->preco < 0) {
-            printf("Valor inválido. Por favor, insira um número válido e não negativo.\n");
+        // Tenta ler o preço como um float
+        if (scanf("%f", &p->preco) != 1) {
+            // Se a leitura falhar, limpa o buffer e solicita novamente
+            printf("Valor inválido. Por favor, insira um número válido.\n");
             while(getchar() != '\n');  // Limpar o buffer de entrada
+        } else if (p->preco < 0) {
+            printf("O preço não pode ser negativo. Tente novamente.\n");
         } else {
-            break;
+            break; // Se o valor for válido e não negativo, sai do loop
         }
     }
 
     printf("\nCategoria: \n");
-    while(1) {
+    while(1){
         printf("(1) Entrada\n(2) Principal\n(3) Sobremesa\n(4) Bebida\n");
         printf("Informe a opção: ");
         int n;
         if(scanf("%d", &n) != 1 || n < 1 || n > 4) {
-            printf("Valor inválido. Por favor, insira um número válido entre 1 e 4.\n");
+            printf("Valor inválido. Por favor, insira um número válido.\n");
             while(getchar() != '\n');
         } else {
             p->catego = (categoria)(n - 1);
@@ -101,19 +107,19 @@ void redimensionar_cardapio() {
 
 // Função para remover itens do cardápio
 void remover_card() {
-    if(codigo > 0) {
+    if(codigo > 0){
+        int num;  // Usar um inteiro simples
         printf("\n>> Preencha com as informações do item que deseja remover.\n");
-        int num;
         while(1) {
             printf("Código do item: ");
-            if(scanf("%d", &num) != 1 || num < 1 || num > codigo) {
+            if(scanf("%d", &num) != 1 || num < 1 || num > codigo) {  // Usar &num diretamente
                 printf("Código inválido, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
                 break;
             }
         }
-        num--; // Ajustar para índice
+        num--;  // Ajuste do índice
         for(int i = num; i < codigo - 1; i++) { // Remover item
             cardapio[i] = cardapio[i + 1];
         }
@@ -137,7 +143,7 @@ void criar_pedido_menu() {
         while(1) {
             printf("Quantidade de itens: ");
             if(scanf("%d", &num_itens_pedido) != 1 || num_itens_pedido <= 0 || num_itens_pedido > codigo) {
-                printf("Valor inválido. Por favor, insira um número válido entre 1 e %d.\n", codigo);
+                printf("Valor inválido. Por favor, insira um número válido.", codigo);
                 while(getchar() != '\n');
             } else {
                 break;
@@ -209,7 +215,7 @@ void gerenciar_pedidos() {
             printf("Status: %s\n", status_para_string(pedidos[i].status));
             printf("Cliente: %s\n", pedidos[i].nome_cliente);
             printf("Itens do Pedido:\n");
-            float total = 0;
+            float total = 0; // Inicializar total
             for (int j = 0; j < pedidos[i].num_itens; j++) {
                 printf("-> %s - R$ %.2f\n", pedidos[i].itens[j].nome, pedidos[i].itens[j].preco);
                 total += pedidos[i].itens[j].preco;
@@ -224,34 +230,33 @@ void gerenciar_pedidos() {
 
 // Função para alterar o status do pedido
 void alterar_status() {
-    if(num_pedidos > 0) {
+    if (num_pedidos > 0) {
         printf("\n>> Preencha com as informações do pedido que deseja atualizar.\n");
         int cod_pedido;
         while(1) {
-            printf("Código do pedido: ");
+            printf("Número do pedido: ");
             if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos) {
-                printf("Código inválido, tente novamente!\n");
+                printf("Valor inválido. Por favor, insira um número válido.\n");
                 while(getchar() != '\n');
             } else {
                 break;
             }
         }
-
+        cod_pedido--; // Ajuste do índice
         int opcao;
         while(1) {
             printf("\nStatus:\n");
             printf("(1) Pendente\n(2) Em preparo\n(3) Pronto\n(4) Entregue\n");
             printf("Informe o status: ");
             if(scanf("%d", &opcao) != 1 || opcao < 1 || opcao > 4) {
-                printf(">> Valor inválido. Por favor, insira um número válido entre 1 e 4.\n");
+                printf(">> Valor inválido. Por favor, insira um número válido.\n");
                 while(getchar() != '\n');
             } else {
                 break;
             }
         }
-
-        pedidos[cod_pedido - 1].status = (StatusPedido)(opcao - 1);
-        printf("Status do pedido %d alterado para: %s\n", cod_pedido, status_para_string(pedidos[cod_pedido - 1].status));
+        pedidos[cod_pedido].status = (StatusPedido)(opcao - 1);
+        printf("Status do pedido %d alterado para: %s\n", cod_pedido + 1, status_para_string(pedidos[cod_pedido].status));
     } else {
         printf(">> Nenhum pedido cadastrado no momento.\n\n");
     }
@@ -263,37 +268,36 @@ void alterar_pedido() {
         printf("\n>> Preencha com as informações do pedido que deseja atualizar.\n");
         int cod_pedido;
         while(1) {
-            printf("Código do pedido: ");
+            printf("Número do pedido: ");
             if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos) {
-                printf("Código inválido, tente novamente.\n");
+                printf("Número inválido. Por favor, insira um código válido.\n");
                 while(getchar() != '\n');
             } else {
                 break;
             }
         }
-
-        Pedido *pedido = &pedidos[cod_pedido - 1];
+        cod_pedido--; // Ajuste do índice
+        Pedido *pedido = &pedidos[cod_pedido];
         printf("\nAlterando o pedido %d de %s:\n", pedido->cod_pedido, pedido->nome_cliente);
         int num_itens_pedido;
         printf("Quantidade de itens: ");
         scanf("%d", &num_itens_pedido);
 
-        if (num_itens_pedido > 0 && num_itens_pedido <= codigo) {
-            free(pedido->itens); // Liberar memória anterior
-            pedido->itens = malloc(num_itens_pedido * sizeof(item)); // Alocar nova memória para os itens
+        if (num_itens_pedido > 0 && num_itens_pedido <= max) {
             pedido->num_itens = num_itens_pedido;
+            // Receber os novos itens do pedido
             for (int i = 0; i < num_itens_pedido; i++) {
                 int codigo_item;
                 while(1) {
                     printf("Código do item %d do pedido: ", i + 1);
                     if(scanf("%d", &codigo_item) != 1 || codigo_item <= 0 || codigo_item > codigo) {
-                        printf(">> Código inválido, tente novamente.\n");
+                        printf("Valor inválido. Por favor, insira um número válido.\n");
                         while(getchar() != '\n');
                     } else {
-                        pedido->itens[i] = cardapio[codigo_item - 1]; // Atualizar item do pedido
                         break;
                     }
                 }
+                pedido->itens[i] = cardapio[codigo_item - 1]; // Atualizar item do pedido
             }
             printf(">> Pedido %d atualizado com sucesso.\n", pedido->cod_pedido);
         } else {
@@ -306,32 +310,32 @@ void alterar_pedido() {
 
 // Função para remover um pedido pelo código
 void remover_pedido() {
-    if(num_pedidos > 0) {
+    if(num_pedidos > 0){
         printf("\n>> Preencha com as informações do pedido que deseja remover.\n");
         int cod_pedido;
-        while(1) {
-            printf("Código do pedido: ");
-            if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos) {
-                printf("Pedido não encontrado. \n");
+        while(1){
+            printf("Número do pedido: ");
+            if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos){
+                printf("Valor inválido. Por favor, insira um número válido.\n");
                 while(getchar() != '\n');
-            } else {
-                break;
-            }
+            }else{break;}
         }
-
-        free(pedidos[cod_pedido - 1].itens); // Liberar memória dos itens do pedido
-        for (int i = cod_pedido - 1; i < num_pedidos - 1; i++) {
+        cod_pedido--; // Ajuste do índice
+        // Remover pedido e reorganizar lista
+        for (int i = cod_pedido; i < num_pedidos - 1; i++) {
             pedidos[i] = pedidos[i + 1];
         }
         num_pedidos--;
         printf("Pedido removido com sucesso.\n");
-    } else {
+    }else{
         printf("Nenhum pedido cadastrado no momento.\n");
     }
 }
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
+    int *opcion = (int *)malloc(sizeof(int));
+    int *opc = (int *)malloc(sizeof(int));
 
     // Alocar memória inicial
     cardapio = malloc(capacidade_cardapio * sizeof(item));
@@ -347,23 +351,18 @@ int main() {
         return 1; // Sair do programa em caso de erro
     }
 
-    int opcao;
-    while (1) {
+    while (1) {  
         printf("\n=========================================== Gerenciamento do Restaurante ===================================\n\n");
         printf("(1) Cadastrar item \n(2) Exibir cardápio\n(3) Atualizar cardápio\n(4) Remover itens do cardápio\n");
         printf("(5) Criar pedido\n(6) Gerenciar pedidos\n(7) Alterar status de pedidos\n(8) Alterar pedido\n(9) Remover pedido\n(10) Sair\n\n");
-        
-        while(1) {
+        while(1){
             printf("<< Informe a opção: ");
-            if(scanf("%d", &opcao) != 1) {
+            if(scanf("%d", opcion) != 1){
                 printf("Valor inválido. Por favor, insira um número válido.\n");
                 while(getchar() != '\n');
-            } else {
-                break;
-            }
+            }else{break;}
         }
-
-        switch (opcao) {
+        switch (*opcion) {
             case 1: // Cadastrar itens no cardápio
                 if (codigo >= capacidade_cardapio) {
                     redimensionar_cardapio();
@@ -398,6 +397,9 @@ int main() {
                 }
                 break;
             case 4:
+                if(codigo > 0){
+                    exibir_card();
+                }
                 remover_card();
                 break;
             case 5:
@@ -416,18 +418,28 @@ int main() {
                 remover_pedido();
                 break;
             case 10:
-                // Liberar memória antes de sair
-                for (int i = 0; i < num_pedidos; i++) {
-                    free(pedidos[i].itens);
+                while(1){
+                    printf(">> Tem certeza que deseja sair?\n[1] Sim\n[0] Não\n");
+                    if(scanf("%d", opc) != 1){
+                        printf("Valor inválido. Por favor, insira um número válido.\n");
+                        while(getchar() != '\n');    
+                    }else if(*opc < 0 || *opc > 1){
+                        printf("Opção inválida, tente novamente.\n");
+                    }else{break;}
                 }
                 free(cardapio);
                 free(pedidos);
-                printf(">> Obrigado, volte sempre!\n");
-                return 0;
+                if(*opc == 1){
+                    printf(">> Obrigado, volte sempre!\n");
+                    return 0;
+                }
+                break;
             default:
                 printf(">> Número inválido, tente novamente.\n");
                 break;
         }
     }
+    free(opcion);
+    free(opc);
     return 0;
 }
