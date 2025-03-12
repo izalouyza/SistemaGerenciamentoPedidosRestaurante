@@ -70,25 +70,24 @@ void cadastro_card(item *p) { // Cadastrar e atualizar itens do cardápio
         // Tenta ler o preço como um float
         if (scanf("%f", &p->preco) != 1) {
             // Se a leitura falhar, limpa o buffer e solicita novamente
-            printf("Valor inválido. O preço não pode incluir letras e caracteres especiais. Por favor, tente novamente.\n");
+            printf(">> Valor inválido. O preço não pode incluir letras e caracteres especiais. Por favor, tente novamente.\n");
             while(getchar() != '\n');  // Limpar o buffer de entrada
         } else if (p->preco < 0) {
-            printf("Valor inválido. O preço não pode ser um valor negativo. Por favor, tente novamente.\n");
+            printf(">> Valor inválido. O preço não pode ser um valor negativo. Por favor, tente novamente.\n");
         } else {
             break; // Se o valor for válido e não negativo, sai do loop
         }
     }
-    int n;
+
     printf("\nCategoria: \n");
     while(1){
         printf("(1) Entrada\n(2) Principal\n(3) Sobremesa\n(4) Bebida\n");
-        printf("Informe a opção: ");
-        if(scanf("%d", &n) != 1) {
-            printf("Valor inválido, por favor digite um valor válido\n");
+        printf("<< Informe a opção: ");
+        int n;
+        if(scanf("%d", &n) != 1 || n < 1 || n > 4) {
+            printf(">> Opção inválida. Por favor, tente novamente.\n");
             while(getchar() != '\n');
-        } else if(n <= 0 || n > 4){
-            printf("Opção inválida, por favor tente novamente.\n");
-        }else {
+        } else {
             p->catego = (categoria)(n - 1);
             break;
         }
@@ -100,7 +99,7 @@ void redimensionar_cardapio() {
     capacidade_cardapio *= 2;
     item* temp = realloc(cardapio, capacidade_cardapio * sizeof(item));
     if (temp == NULL) {
-        printf("Erro ao redimensionar o cardápio.\n");
+        printf(">> Erro ao redimensionar o cardápio.\n");
         exit(1); // Sair do programa em caso de erro
     }
     cardapio = temp;
@@ -114,7 +113,7 @@ void remover_card() {
         while(1) {
             printf("Código do item: ");
             if(scanf("%d", &num) != 1 || num < 1 || num > codigo) {  // Usar &num diretamente
-                printf("Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
+                printf(">> Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
                 break;
@@ -144,7 +143,7 @@ void criar_pedido_menu() {
         while(1) {
             printf("Quantidade de itens: ");
             if(scanf("%d", &num_itens_pedido) != 1 || num_itens_pedido <= 0) {
-                printf("Quantidade inválida. A quantidade de itens não pode ser negativa ou incluir letras e caracteres especiais. Por favor, tente novamente.\n");
+                printf(">> Quantidade inválida. A quantidade de itens não pode ser negativa ou incluir letras e caracteres especiais. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
                 break;
@@ -155,7 +154,7 @@ void criar_pedido_menu() {
             capacidade_pedidos *= 2;
             Pedido* temp = realloc(pedidos, capacidade_pedidos * sizeof(Pedido));
             if (temp == NULL) {
-                printf("Erro ao redimensionar os pedidos.\n");
+                printf(">> Erro ao redimensionar os pedidos.\n");
                 exit(1); // Sair do programa em caso de erro
             }
             pedidos = temp;
@@ -238,7 +237,7 @@ void alterar_status() {
         while(1) {
             printf("Número do pedido: ");
             if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos) {
-                printf("Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
+                printf(">> Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
                 break;
@@ -249,7 +248,7 @@ void alterar_status() {
         while(1) {
             printf("\nStatus:\n");
             printf("(1) Pendente\n(2) Em preparo\n(3) Pronto\n(4) Entregue\n");
-            printf("Informe o status: ");
+            printf("<< Informe o status: ");
             if(scanf("%d", &opcao) != 1 || opcao < 1 || opcao > 4) {
                 printf(">> Opção inválida. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
@@ -258,7 +257,7 @@ void alterar_status() {
             }
         }
         pedidos[cod_pedido].status = (StatusPedido)(opcao - 1);
-        printf("Status do pedido %d alterado para: %s\n", cod_pedido + 1, status_para_string(pedidos[cod_pedido].status));
+        printf(">> Status do pedido %d alterado para: %s\n", cod_pedido + 1, status_para_string(pedidos[cod_pedido].status));
 
         // Verifica se o status foi alterado para "Entregue"
         if (pedidos[cod_pedido].status == ENTREGUE) {
@@ -271,13 +270,13 @@ void alterar_status() {
 
 // Função para alterar um pedido existente
 void alterar_pedido() {
-    if(num_pedidos > 0) {
+    if(num_pedidos > 0 && codigo > 0) {
         printf("\n>> Preencha com as informações do pedido que deseja atualizar.\n");
         int cod_pedido;
         while(1) {
             printf("Número do pedido: ");
             if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos) {
-                printf("Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
+                printf(">> Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
                 break;
@@ -285,7 +284,7 @@ void alterar_pedido() {
         }
         cod_pedido--; // Ajuste do índice
         Pedido *pedido = &pedidos[cod_pedido];
-        printf("\nAlterando o pedido %d de %s:\n", pedido->cod_pedido, pedido->nome_cliente);
+        printf("\n>> Alterando o pedido %d de %s:\n", pedido->cod_pedido, pedido->nome_cliente);
         int num_itens_pedido;
         printf("Quantidade de itens: ");
         scanf("%d", &num_itens_pedido);
@@ -298,7 +297,7 @@ void alterar_pedido() {
                 while(1) {
                     printf("Código do item %d do pedido: ", i + 1);
                     if(scanf("%d", &codigo_item) != 1 || codigo_item <= 0 || codigo_item > codigo) {
-                        printf("Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
+                        printf(">> Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
                         while(getchar() != '\n');
                     } else {
                         break;
@@ -310,8 +309,10 @@ void alterar_pedido() {
         } else {
             printf(">> Número de itens inválido. Operação cancelada.\n");
         }
-    } else {
+    } else if(num_pedidos <= 0){
         printf(">> Não há pedidos cadastrados.\n");
+    }else if(codigo <= 0){
+        printf(">> Não há itens cadastrados.\n");
     }
 }
 
@@ -323,7 +324,7 @@ void remover_pedido() {
         while(1){
             printf("Número do pedido: ");
             if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos){
-                printf("Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
+                printf(">> Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             }else{break;}
         }
@@ -333,39 +334,41 @@ void remover_pedido() {
             pedidos[i] = pedidos[i + 1];
         }
         num_pedidos--;
-        printf("Pedido removido com sucesso.\n");
+        printf(">> Pedido removido com sucesso.\n");
     }else{
-        printf("Não há pedidos cadastrados.\n");
+        printf(">> Não há pedidos cadastrados.\n");
     }
 }
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int *opcion = (int *)malloc(sizeof(int));
+
     int *opc = (int *)malloc(sizeof(int));
 
     // Alocar memória inicial
     cardapio = malloc(capacidade_cardapio * sizeof(item));
     if (cardapio == NULL) {
-        printf("Erro ao alocar memória para o cardápio.\n");
+        printf(">> Erro ao alocar memória para o cardápio.\n");
         return 1; // Sair do programa em caso de erro
     }
 
     pedidos = malloc(capacidade_pedidos * sizeof(Pedido));
     if (pedidos == NULL) {
-        printf("Erro ao alocar memória para os pedidos.\n");
+        printf(">> Erro ao alocar memória para os pedidos.\n");
         free(cardapio); // Liberar memória do cardápio antes de sair
         return 1; // Sair do programa em caso de erro
     }
 
     while (1) {  
-        printf("\n=========================================== Gerenciamento do Restaurante ===================================\n\n");
+        printf("\n========================================== Gerenciamento do Restaurante ===================================\n\n");
         printf("(1) Cadastrar item \n(2) Exibir cardápio\n(3) Atualizar cardápio\n(4) Remover itens do cardápio\n");
         printf("(5) Criar pedido\n(6) Gerenciar pedidos\n(7) Alterar status de pedidos\n(8) Alterar pedido\n(9) Remover pedido\n(10) Sair\n\n");
         while(1){
+            printf("código = %d\n\n", codigo);
             printf("<< Informe a opção: ");
             if(scanf("%d", opcion) != 1){
-                printf("Opção inválida. Por favor, tente novamente.\n");
+                printf(">> Opção inválida. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             }else{break;}
         }
@@ -426,12 +429,12 @@ int main() {
                 break;
             case 10:
                 while(1){
-                    printf(">> Tem certeza que deseja sair?\n[1] Sim\n[0] Não\n");
+                    printf("<< Tem certeza que deseja sair?\n[1] Sim\n[0] Não\n");
                     if(scanf("%d", opc) != 1){
-                        printf("Opção inválida. Por favor, insira [1] Sim ou [0] Não.\n");
+                        printf("<< Opção inválida. Por favor, insira [1] Sim ou [0] Não.\n");
                         while(getchar() != '\n');    
                     }else if(*opc < 0 || *opc > 1){
-                        printf("Opção inválida. Por favor, insira [1] Sim ou [0] Não.\n");
+                        printf("<< Opção inválida. Por favor, insira [1] Sim ou [0] Não.\n");
                     }else{break;}
                 }
                 free(cardapio);
