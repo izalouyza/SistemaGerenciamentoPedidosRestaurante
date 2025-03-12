@@ -78,16 +78,17 @@ void cadastro_card(item *p) { // Cadastrar e atualizar itens do cardápio
             break; // Se o valor for válido e não negativo, sai do loop
         }
     }
-
+    int n;
     printf("\nCategoria: \n");
     while(1){
         printf("(1) Entrada\n(2) Principal\n(3) Sobremesa\n(4) Bebida\n");
         printf("Informe a opção: ");
-        int n;
-        if(scanf("%d", &n) != 1 || n < 1 || n > 4) {
-            printf("Opção inválida. Por favor, tente novamente.\n");
+        if(scanf("%d", &n) != 1) {
+            printf("Valor inválido, por favor digite um valor válido\n");
             while(getchar() != '\n');
-        } else {
+        } else if(n <= 0 || n > 4){
+            printf("Opção inválida, por favor tente novamente.\n");
+        }else {
             p->catego = (categoria)(n - 1);
             break;
         }
@@ -142,7 +143,7 @@ void criar_pedido_menu() {
         int num_itens_pedido;
         while(1) {
             printf("Quantidade de itens: ");
-            if(scanf("%d", &num_itens_pedido) != 1 || num_itens_pedido <= 0 || num_itens_pedido > codigo) {
+            if(scanf("%d", &num_itens_pedido) != 1 || num_itens_pedido <= 0) {
                 printf("Quantidade inválida. A quantidade de itens não pode ser negativa ou incluir letras e caracteres especiais. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
