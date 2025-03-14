@@ -1,9 +1,7 @@
 #ifndef UTILITARIOS_H
 #define UTILITARIOS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
+// Função para limpar o buffer de entrada
 void limpar_buffer();
 
 #endif // UTILITARIOS_H
