@@ -1,4 +1,7 @@
-#include "cardapio.h"
+#include <stdio.h>      // Para funções de entrada e saída
+#include <stdlib.h>     // Para funções de alocação de memória (malloc, realloc, free)
+#include <string.h>     // Para funções de manipulação de strings (fgets, strcspn)
+#include "cardapio.h"   // Para as definições de tipos e funções do cardápio
 
 void exibir_card(item* cardapio, int codigo) {
     if(codigo > 0) {
@@ -6,7 +9,10 @@ void exibir_card(item* cardapio, int codigo) {
         printf("%-10s %-20s %-40s %-15s %-10s\n", "Código", "Nome", "Descrição", "Preço R$", "Categoria");
         printf("___________________________________________________________________________________________________________\n\n");
         for(int i = 0; i < codigo; i++) {
-            printf("%-10d %-20s %-40s %-15.2f %-10s\n", i + 1, cardapio[i].nome, cardapio[i].descri, cardapio[i].preco, (cardapio[i].catego == entrada) ? "Entrada" : (cardapio[i].catego == principal) ? "Principal" : (cardapio[i].catego == sobremesa) ? "Sobremesa" : "Bebida");
+            printf("%-10d %-20s %-40s %-15.2f %-10s\n", i + 1, cardapio[i].nome, cardapio[i].descri, cardapio[i].preco, 
+                   (cardapio[i].catego == entrada) ? "Entrada" : 
+                   (cardapio[i].catego == principal) ? "Principal" : 
+                   (cardapio[i].catego == sobremesa) ? "Sobremesa" : "Bebida");
         }
         printf("___________________________________________________________________________________________________________\n\n");
     } else {
@@ -55,22 +61,22 @@ void cadastro_card(item *p) {
 }
 
 void redimensionar_cardapio(item** cardapio, int* capacidade_cardapio) {
-   capacidade_cardapio *= 2;
-    item* temp = realloc(cardapio, capacidade_cardapio * sizeof(item));
+    *capacidade_cardapio *= 2; // Dobra a capacidade
+    item* temp = realloc(*cardapio, *capacidade_cardapio * sizeof(item));
     if (temp == NULL) {
         printf("Erro ao redimensionar o cardápio.\n");
         exit(1); // Sair do programa em caso de erro
     }
-    cardapio = temp;
+    *cardapio = temp; // Atualiza o ponteiro do cardápio
 }
 
 void remover_card(item* cardapio, int* codigo) {
-   if(codigo > 0){
+    if(*codigo > 0) {
         int num;  // Usar um inteiro simples
         printf("\n>> Preencha com as informações do item que deseja remover.\n");
         while(1) {
             printf("Código do item: ");
-            if(scanf("%d", &num) != 1 || num < 1 || num > codigo) {  // Usar &num diretamente
+            if(scanf("%d", &num) != 1 || num < 1 || num > *codigo) {  // Usar &num diretamente
                 printf("Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
             } else {
@@ -78,13 +84,12 @@ void remover_card(item* cardapio, int* codigo) {
             }
         }
         num--;  // Ajuste do índice
-        for(int i = num; i < codigo - 1; i++) { // Remover item
+        for(int i = num; i < *codigo - 1; i++) { // Remover item
             cardapio[i] = cardapio[i + 1];
         }
-        codigo--;
+        (*codigo)--; // Diminui o contador de itens
         printf(">> Item removido com sucesso.\n\n");
     } else {
         printf(">> Não há itens cadastrados.\n\n");
     }
-
 }
