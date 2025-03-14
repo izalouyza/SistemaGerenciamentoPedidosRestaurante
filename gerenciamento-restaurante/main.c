@@ -2,7 +2,9 @@
 #include <stdlib.h>     // Para funções de alocação de memória
 #include <string.h>     // Para manipulação de strings
 #include <locale.h>     // Para configurar a localidade
-#include "utilitarios.h" // Para as definições de estruturas e funções
+#include "cardapio_pedidos/cardapio.h"
+#include "cardapio_pedidos/pedidos.h"
+#include "cardapio_pedidos/utilitarios.h" // Para as definições de estruturas e funções
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
