@@ -5,37 +5,38 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Enumeração para os status do pedido
-typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
+// Enum para status dos pedidos
+typedef enum {pendente, em_preparo, pronto, entregue} StatusPedido;
 
-// Estrutura para representar um item de pedido
+// Struct para representar um item do cardápio
 typedef struct {
-    int codigo_item;      // Código do item
-    int quantidade;       // Quantidade do item
-    float preco_unitario; // Preço unitário do item
-} pedido_item;
+    char nome[100];      // Nome do item
+    char descri[100];    // Descrição do item
+    float preco;         // Preço em R$ do item
+    int catego; // Categoria do item
+    } item;
 
-// Estrutura para representar um pedido
+// Struct para representar um pedido
 typedef struct {
-    int numero_pedido;    // Número do pedido
-    pedido_item* itens;    // Ponteiro para os itens do pedido
-    int total_itens;      // Total de itens no pedido
-    float total_pedido;   // Total do valor do pedido
-    StatusPedido status;   // Status do pedido
-} pedido;
+    int cod_pedido;          // Identificador do pedido
+    char nome_cliente[100];  // Nome do cliente
+    item* itens;            // Armazenar os itens do pedido
+    int num_itens;          // Número de itens no pedido
+    StatusPedido status;     // Status do pedido
+} Pedido;
 
 // Funções para gerenciar pedidos
-void inicializar_pedido(pedido* p); // Inicializa um novo pedido
-void adicionar_item_pedido(pedido* p, int codigo_item, int quantidade, float preco_unitario); // Adiciona um item ao pedido
-void remover_item_pedido(pedido* p, int codigo_item); // Remove um item do pedido
-void exibir_pedido(const pedido* p); // Exibe os detalhes do pedido
-void liberar_pedido(pedido* p); // Libera a memória alocada para os itens do pedido
+void criar_pedido_menu();
+void inicializar_pedido(Pedido* pedido, int num_itens);
+void gerenciar_pedidos();
+void alterar_status();
+void alterar_pedido();
+void remover_pedido();
+const char* status_para_string(StatusPedido status);
 
-// Funções adicionais para gerenciar pedidos
-void criar_pedido_menu(); // Função para criar um novo pedido
-void gerenciar_pedidos();  // Função para gerenciar e exibir pedidos
-void alterar_status();      // Função para alterar o status de um pedido
-void alterar_pedido();      // Função para alterar um pedido existente
-void remover_pedido();      // Função para remover um pedido
+// Declarações de variáveis globais
+extern Pedido* pedidos;          // Declaração da variável global para pedidos
+extern int capacidade_pedidos;   // Declaração da variável global para capacidade de pedidos
+extern int num_pedidos;          // Declaração da variável global para número de pedidos
 
 #endif // PEDIDOS_H

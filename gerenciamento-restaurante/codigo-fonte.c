@@ -331,7 +331,8 @@ void remover_pedido() {
 }
 
 int main() {
-    setlocale(LC_ALL, "Portuguese"); // configurar sistema para o idioma português
+    system("chcp 65001"); 
+    
     // variável dinâmica para interagir com a interface principal
     int *opcion = (int *)malloc(sizeof(int)); 
     // variável dinâmica para interagir com a interface de saída
