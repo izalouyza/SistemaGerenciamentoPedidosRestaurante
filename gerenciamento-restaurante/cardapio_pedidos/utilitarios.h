@@ -8,14 +8,14 @@
 
 // Enumeração de categorias do cardápio
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
-extern char* categs[];
+extern char* categs[]; // Declaração externa para o array categs
 
 // Struct para representar um item do cardápio
 typedef struct {
-    char nome[100];
-    char descri[100];
-    float preco;
-    categoria catego;
+    char nome[100]; // Nome do item
+    char descri[100]; // Descrição do item
+    float preco; // Preço do item
+    categoria catego; // Categoria do item
 } item;
 
 // Enum para status dos pedidos
@@ -23,14 +23,14 @@ typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
 
 // Struct para representar um pedido
 typedef struct {
-    int cod_pedido;
-    char nome_cliente[100];
-    item* itens;
-    int num_itens;
-    StatusPedido status;
+    int cod_pedido; // Código do pedido
+    char nome_cliente[100]; // Nome do cliente
+    item* itens; // Ponteiro para os itens do pedido
+    int num_itens; // Número de itens no pedido
+    StatusPedido status; // Status do pedido
 } Pedido;
 
-// Funções para manipulação do cardápio
+// Funções para manipulação do cardápio e pedidos
 void exibir_card(item* cardapio, int codigo);
 void cadastro_card(item *p);
 void redimensionar_cardapio(item** cardapio, int* capacidade_cardapio);
