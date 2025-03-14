@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cardapio.h"
+#include "cardapio_pedidos/cardapio.h"
 
 // Enumeração de categorias do cardápio
 char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
