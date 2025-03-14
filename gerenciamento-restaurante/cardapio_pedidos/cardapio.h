@@ -10,10 +10,10 @@ typedef enum {entrada, principal, sobremesa, bebida} categoria;
 
 // Estrutura para representar um item do cardápio
 typedef struct {
-    char nome[100]; // nome do item
-    char descri[100]; // descrição do item
-    float preco; // preço em R$ do item
-    categoria catego; // Categoria do item
+    char nome[100];
+    char descri[100];
+    float preco;
+    categoria catego;
 } item;
 
 // Funções para manipulação do cardápio
@@ -21,7 +21,5 @@ void exibir_card(item* cardapio, int codigo);
 void cadastro_card(item *p);
 void redimensionar_cardapio(item** cardapio, int* capacidade_cardapio);
 void remover_card(item* cardapio, int* codigo);
-
-extern char* categs[]; // Declaração externa para o array categs
 
 #endif // CARDAPIO_H
