@@ -1,7 +1,7 @@
 #include <stdio.h>      // Para funções de entrada e saída
 #include <stdlib.h>     // Para funções de alocação de memória
 #include <string.h>     // Para manipulação de strings
-#include "utilitarios.h" // Para as definições de estruturas e funções
+#include "cardapio_pedidos/utilitarios.h" // Para as definições de estruturas e funções
 
 // Definição das categorias
 char* categs[] = {"Entrada", "Principal", "Sobremesa", "Bebida"};
