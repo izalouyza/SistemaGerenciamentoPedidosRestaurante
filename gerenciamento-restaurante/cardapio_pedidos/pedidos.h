@@ -1,25 +1,30 @@
 #ifndef PEDIDOS_H
 #define PEDIDOS_H
 
-#include "cardapio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Enum para status dos pedidos
-typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
-
-// Struct para representar um pedido
+// Estrutura para representar um item de pedido
 typedef struct {
-    int cod_pedido;
-    char nome_cliente[100];
-    item* itens;
-    int num_itens;
-    StatusPedido status;
-} Pedido;
+    int codigo_item;
+    int quantidade;
+    float preco_unitario;
+} pedido_item;
 
-// Funções de pedidos
-void criar_pedido_menu(Pedido** pedidos, int* num_pedidos, int* capacidade_pedidos, item* cardapio, int codigo);
-void gerenciar_pedidos(Pedido* pedidos, int num_pedidos);
-void alterar_status(Pedido* pedidos, int num_pedidos);
-void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo);
-void remover_pedido(Pedido* pedidos, int* num_pedidos);
+// Estrutura para representar um pedido
+typedef struct {
+    int numero_pedido;
+    pedido_item* itens;
+    int total_itens;
+    float total_pedido;
+} pedido;
+
+// Funções para gerenciar pedidos
+void inicializar_pedido(pedido* p);
+void adicionar_item_pedido(pedido* p, int codigo_item, int quantidade, float preco_unitario);
+void remover_item_pedido(pedido* p, int codigo_item);
+void exibir_pedido(const pedido* p);
+void liberar_pedido(pedido* p);
 
 #endif // PEDIDOS_H
