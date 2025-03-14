@@ -8,7 +8,7 @@
 // Enumeração de categorias do cardápio
 typedef enum {entrada, principal, sobremesa, bebida} categoria;
 
-// Estrutura para representar um item do cardápio
+// Struct para representar um item do cardápio
 typedef struct {
     char nome[100];
     char descri[100];
@@ -16,7 +16,7 @@ typedef struct {
     categoria catego;
 } item;
 
-// Funções para manipulação do cardápio
+// Funções do cardápio
 void exibir_card(item* cardapio, int codigo);
 void cadastro_card(item *p);
 void redimensionar_cardapio(item** cardapio, int* capacidade_cardapio);
