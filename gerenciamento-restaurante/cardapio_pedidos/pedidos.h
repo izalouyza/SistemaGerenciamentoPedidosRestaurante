@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Enumeração para os status do pedido
+typedef enum {PENDENTE, EM_PREPARO, PRONTO, ENTREGUE} StatusPedido;
+
 // Estrutura para representar um item de pedido
 typedef struct {
     int codigo_item;      // Código do item
@@ -18,6 +21,7 @@ typedef struct {
     pedido_item* itens;    // Ponteiro para os itens do pedido
     int total_itens;      // Total de itens no pedido
     float total_pedido;   // Total do valor do pedido
+    StatusPedido status;   // Status do pedido
 } pedido;
 
 // Funções para gerenciar pedidos
