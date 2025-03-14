@@ -1,8 +1,10 @@
 #include <stdio.h>      // Para funções de entrada e saída
 #include <stdlib.h>     // Para alocação de memória
 #include <string.h>     // Para manipulação de strings
-#include "pedidos.h"    // Para usar a estrutura Pedido e as funções relacionadas
-#include "cardapio.h"   // Para usar a estrutura item e a enumeração categoria
+#include "cardapio_pedidos/cardapio.h" // Para usar a estrutura item e a enumeração categoria
+#include "cardapio_pedidos/pedidos.h" // Para usar a estrutura Pedido e as funções relacionadas
+
+
 
 // Definindo um valor inicial para a capacidade de pedidos
 int capacidade_pedidos = 2; 
