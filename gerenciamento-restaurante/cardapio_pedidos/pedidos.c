@@ -1,8 +1,9 @@
 #include "pedidos.h"
 
-// pedidos.c
-
-#include "pedidos.h"
+// Variáveis globais
+pedido* pedidos = NULL; // Armazenar pedidos
+int num_pedidos = 0; // Contador de pedidos
+int capacidade_pedidos = 2; // Capacidade inicial para pedidos
 
 // Função para criar um novo pedido
 void criar_pedido_menu() {
