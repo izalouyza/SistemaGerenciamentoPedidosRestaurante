@@ -25,4 +25,4 @@ void alterar_status(Pedido* pedidos, int num_pedidos);
 void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo);
 void remover_pedido(Pedido* pedidos, int* num_pedidos);
 
-#endif // PEDIDO_H
+#endif // PEDIDOS_H
