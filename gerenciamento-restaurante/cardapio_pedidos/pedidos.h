@@ -27,4 +27,11 @@ void remover_item_pedido(pedido* p, int codigo_item); // Remove um item do pedid
 void exibir_pedido(const pedido* p); // Exibe os detalhes do pedido
 void liberar_pedido(pedido* p); // Libera a memória alocada para os itens do pedido
 
+// Funções adicionais para gerenciar pedidos
+void criar_pedido_menu(); // Função para criar um novo pedido
+void gerenciar_pedidos();  // Função para gerenciar e exibir pedidos
+void alterar_status();      // Função para alterar o status de um pedido
+void alterar_pedido();      // Função para alterar um pedido existente
+void remover_pedido();      // Função para remover um pedido
+
 #endif // PEDIDOS_H
