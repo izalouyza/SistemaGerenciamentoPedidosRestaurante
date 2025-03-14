@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "cardapio_pedidos/cardapio.h"
-#include "pedidos.h"
-#include "utilitarios.h"
+#include "cardapio_pedidos/pedidos.h"
+#include "cardapio_pedidos/utilitarios.h"
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
