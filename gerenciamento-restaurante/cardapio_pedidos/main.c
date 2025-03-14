@@ -72,19 +72,19 @@ int main() {
                 remover_card(cardapio, &codigo);
                 break;
             case 5: // Criar um novo pedido
-               criar_pedido_menu(); // chama a função para executar o processo de criação de pedidos
+                criar_pedido_menu(); // Chama a função para executar o processo de criação de pedidos
                 break;
             case 6: // Gerenciar pedidos
-                gerenciar_pedidos(); // chama a função para exibir os pedidos
+                gerenciar_pedidos(); // Chama a função para exibir os pedidos
                 break;
             case 7: // Alterar status de pedidos
-                alterar_status(); // chama a função para executar o processo de atualização de status do pedido
+                alterar_status(); // Chama a função para executar o processo de atualização de status do pedido
                 break;
             case 8: // Alterar um pedido
-                alterar_pedido(); // chama a função para executar o processo de alteração de pedidos
+                alterar_pedido(); // Chama a função para executar o processo de alteração de pedidos
                 break;
             case 9: // Remover um pedido
-                remover_pedido(); // chama a função para executar o processo de remoção de pedidos
+                remover_pedido(); // Chama a função para executar o processo de remoção de pedidos
                 break;
             case 10: // Sair do sistema
                 printf(">> Obrigado, volte sempre.\n");
