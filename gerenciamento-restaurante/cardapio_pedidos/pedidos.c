@@ -1,4 +1,8 @@
-#include "pedidos.h"
+#include <stdio.h>      // Para funções de entrada e saída
+#include <stdlib.h>     // Para funções de alocação de memória (malloc, realloc, free)
+#include <string.h>     // Para funções de manipulação de strings (strncpy)
+#include "pedidos.h"    // Para as definições de tipos e funções de pedidos
+#include "cardapio.h"   // Para a definição da struct item e a função status_para_string
 
 void criar_pedido_menu(Pedido** pedidos, int* num_pedidos, int* capacidade_pedidos, item* cardapio, int codigo) {
     if (codigo > 0) {
@@ -19,18 +23,19 @@ void criar_pedido_menu(Pedido** pedidos, int* num_pedidos, int* capacidade_pedid
             }
         }
 
-        if (num_pedidos >= capacidade_pedidos) {
-            capacidade_pedidos *= 2;
-            Pedido* temp = realloc(pedidos, capacidade_pedidos * sizeof(Pedido));
+        // Verifica se é necessário redimensionar a lista de pedidos
+        if (*num_pedidos >= *capacidade_pedidos) {
+            *capacidade_pedidos *= 2;
+            Pedido* temp = realloc(*pedidos, *capacidade_pedidos * sizeof(Pedido));
             if (temp == NULL) {
                 printf("Erro ao redimensionar os pedidos.\n");
                 exit(1); // Sair do programa em caso de erro
             }
-            pedidos = temp;
+            *pedidos = temp;
         }
 
         Pedido novo_pedido;
-        novo_pedido.cod_pedido = num_pedidos + 1;
+        novo_pedido.cod_pedido = *num_pedidos + 1;
         strncpy(novo_pedido.nome_cliente, nome_cliente, sizeof(novo_pedido.nome_cliente) - 1);
         novo_pedido.num_itens = num_itens_pedido;
         novo_pedido.status = PENDENTE;  // Status inicial
@@ -50,8 +55,8 @@ void criar_pedido_menu(Pedido** pedidos, int* num_pedidos, int* capacidade_pedid
             }
         }
 
-        pedidos[num_pedidos] = novo_pedido;
-        num_pedidos++;
+        (*pedidos)[*num_pedidos] = novo_pedido; // Adiciona o novo pedido à lista de pedidos
+        (*num_pedidos)++; // Incrementa o contador de pedidos
         printf("\n>> Pedido %d criado com sucesso.\n", novo_pedido.cod_pedido);
         printf("Nome do cliente: %s\n", novo_pedido.nome_cliente);
         printf("Itens do Pedido:\n");
@@ -65,7 +70,7 @@ void criar_pedido_menu(Pedido** pedidos, int* num_pedidos, int* capacidade_pedid
 }
 
 void gerenciar_pedidos(Pedido* pedidos, int num_pedidos) {
-  if (num_pedidos > 0) {
+    if (num_pedidos > 0) {
         printf("\n=========================================== Pedidos Realizados ============================================\n\n");
         for (int i = 0; i < num_pedidos; i++) {
             printf("\nPedido %d:\n", pedidos[i].cod_pedido);
@@ -84,7 +89,6 @@ void gerenciar_pedidos(Pedido* pedidos, int num_pedidos) {
         printf(">> Não há pedidos para exibir.\n\n");
     }
 }
-
 
 void alterar_status(Pedido* pedidos, int num_pedidos) {
     if (num_pedidos > 0) {
@@ -125,7 +129,7 @@ void alterar_status(Pedido* pedidos, int num_pedidos) {
 }
 
 void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo) {
-     if(num_pedidos > 0) {
+    if(num_pedidos > 0) {
         printf("\n>> Preencha com as informações do pedido que deseja atualizar.\n");
         int cod_pedido;
         while(1) {
@@ -144,7 +148,7 @@ void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo
         printf("Quantidade de itens: ");
         scanf("%d", &num_itens_pedido);
 
-        if (num_itens_pedido > 0 && num_itens_pedido <= max) {
+        if (num_itens_pedido > 0) {
             pedido->num_itens = num_itens_pedido;
             // Receber os novos itens do pedido
             for (int i = 0; i < num_itens_pedido; i++) {
@@ -155,10 +159,10 @@ void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo
                         printf("Código inválido. Verifique se está correto e corresponde a um item cadastrado. Por favor, tente novamente.\n");
                         while(getchar() != '\n');
                     } else {
+                        pedido->itens[i] = cardapio[codigo_item - 1]; // Atualizar item do pedido
                         break;
                     }
                 }
-                pedido->itens[i] = cardapio[codigo_item - 1]; // Atualizar item do pedido
             }
             printf(">> Pedido %d atualizado com sucesso.\n", pedido->cod_pedido);
         } else {
@@ -170,24 +174,26 @@ void alterar_pedido(Pedido* pedidos, int num_pedidos, item* cardapio, int codigo
 }
 
 void remover_pedido(Pedido* pedidos, int* num_pedidos) {
-     if(num_pedidos > 0){
+    if(*num_pedidos > 0) {
         printf("\n>> Preencha com as informações do pedido que deseja remover.\n");
         int cod_pedido;
-        while(1){
+        while(1) {
             printf("Número do pedido: ");
-            if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > num_pedidos){
+            if(scanf("%d", &cod_pedido) != 1 || cod_pedido <= 0 || cod_pedido > *num_pedidos) {
                 printf("Número inválido. Verifique se está correto e corresponde a um pedido cadastrado. Por favor, tente novamente.\n");
                 while(getchar() != '\n');
-            }else{break;}
+            } else {
+                break;
+            }
         }
         cod_pedido--; // Ajuste do índice
         // Remover pedido e reorganizar lista
-        for (int i = cod_pedido; i < num_pedidos - 1; i++) {
+        for (int i = cod_pedido; i < *num_pedidos - 1; i++) {
             pedidos[i] = pedidos[i + 1];
         }
-        num_pedidos--;
+        (*num_pedidos)--; // Diminui o contador de pedidos
         printf("Pedido removido com sucesso.\n");
-    }else{
-        printf("Não há pedidos cadastrados.\n");
+    } else {
+        printf(">> Não há pedidos cadastrados.\n");
     }
-
+}
