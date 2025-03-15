@@ -109,7 +109,7 @@ O sistema de Gerenciamento de Pedidos para Restaurante permite que o usuário re
 << Informe a opção:
 
 ```
-#### Menu principal do sistema  
+#### Menu principal do sistema:
 - **Cadastrar item**: o sistema permite cadastrar um novo item no cardápio.  
 - **Exibir cardápio**: o sistema exibe todos os itens cadastrados no cardápio.  
 - **Atualizar cardápio**: o sistema permite atualizar as informações de um item já cadastrado.  
