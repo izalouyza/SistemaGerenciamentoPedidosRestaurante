@@ -162,8 +162,8 @@ gcc -o restaurante main.c cardapio.c pedidos.c utilitarios.c
 
 ### 4. Participantes
 
-- IZADORA LOUYZA SILVA FIGUEIREDO
-- LÍVIAN MARIA LUCENA GOMES PINHEIRO
-- MARIA VITORIA FERNANDES ROCHA
-- RENATO VITOR JUVÊNCIO LEITE
-- VICTOR HUGO DE OLIVEIRA
+🔹 **Izadora Louyza Silva Figueiredo**  
+🔹 **Lívia Maria Lucena Gomes Pinheiro**  
+🔹 **Maria Vitória Fernandes Rocha**  
+🔹 **Renato Vitor Juvêncio Leite**  
+🔹 **Victor Hugo de Oliveira**
