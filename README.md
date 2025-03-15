@@ -57,15 +57,6 @@ SistemaGerenciamentoPedidosRestaurante/
 └── README.md
 
 ```
-SistemaGerenciamentoPedidosRestaurante/
-│
-├── ManualdeUso/
-│   └── ManualdeUso.pdf
-│
-├── Relatorio/
-│   └── Relatorio.pdf
-│
-
 - **ManualdeUso.pdf**: arquivo que contém o documento com o manual de uso do sistema.
 - **Relatorio.pdf**: arquivo que contém o documento com o relatório geral do sistema.
 - **cardapio.c**: arquivo que contém a implementação das funções relacionadas ao cardápio.
@@ -141,31 +132,26 @@ Para compilar e executar o sistema, siga os passos abaixo:
 
 ```
 git clone https://github.com/whorshe/SistemaGerenciamentoPedidosRestaurante
-
 ```
 
 3. Acesse a pasta do projeto e siga até o diretório onde os códigos estão alocados:
    
 ```
 cd SistemaGerenciamentoPedidosRestaurante
-
 ```
 
 ```
 cd gerenciamento-restaurante
-
 ```
 
 ```
 cd cardapio_pedidos
-
 ```
 
 4. Compile o programa:
 
 ```
 gcc -o restaurante main.c cardapio.c pedidos.c utilitarios.c
-
 ```
 
 5. Execute o programa:
