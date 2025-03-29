@@ -131,7 +131,7 @@ Para compilar e executar o sistema, siga os passos abaixo:
 2. Clone o repositório do projeto:
 
 ```
-git clone https://github.com/whorshe/SistemaGerenciamentoPedidosRestaurante
+git clone https://github.com/liyuhi/SistemaGerenciamentoPedidosRestaurante
 ```
 
 3. Acesse a pasta do projeto e siga até o diretório onde os códigos estão alocados:
