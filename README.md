@@ -1,6 +1,20 @@
 # Sistema de Gerenciamento de Pedidos de Restaurante
 
-Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I, ministrada pelo professor George Felipe Fernandes Vieira. O projeto é destinado a desenvolver um sistema de gerenciamento de pedidos de restaurante. Dessa forma, este sistema terá como objetivo principal a gestão de pedidos e do cardápio de um restaurante, permitindo o controle eficiente dos pedidos e a administração dos itens disponíveis.
+Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I. O projeto é destinado a desenvolver um sistema de gerenciamento de pedidos de restaurante. Dessa forma, este sistema terá como objetivo principal a gestão de pedidos e do cardápio de um restaurante, permitindo o controle eficiente dos pedidos e a administração dos itens disponíveis.
+
+---
+## 👨‍👧‍👧 Autores
+
+👨‍🏫 **Professor:** George Felipe Fernandes Vieira
+
+👩‍🎓 **Discentes:**  
+🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi)  
+🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena)  
+🔹 [Maria Vitória Fernandes Rocha](https://github.com/tivitoriarocha)  
+🔹 [Renato Vitor Juvêncio Leite](https://github.com/infreavek)  
+🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br)
+
+---
 
 ## 1. Funcionalidades
 
@@ -160,10 +174,3 @@ gcc -o restaurante main.c cardapio.c pedidos.c utilitarios.c
 .\restaurante
 ```
 
-### 4. Participantes
-
-🔹 **Izadora Louyza Silva Figueiredo**  
-🔹 **Lívian Maria Lucena Gomes Pinheiro**  
-🔹 **Maria Vitória Fernandes Rocha**  
-🔹 **Renato Vitor Juvêncio Leite**  
-🔹 **Victor Hugo de Oliveira**
