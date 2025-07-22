@@ -8,7 +8,7 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I. O
 👨‍🏫 **Professor:** George Felipe Fernandes Vieira
 
 👩‍🎓 **Discentes:**  
-🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi)  
+🔹 [Izadora Louyza Silva Figueiredo](https://github.com/izalouyza)  
 🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena)  
 🔹 [Maria Vitória Fernandes Rocha](https://github.com/tivitoriarocha)  
 🔹 [Renato Vitor Juvêncio Leite](https://github.com/infreavek)  
@@ -145,7 +145,7 @@ Para compilar e executar o sistema, siga os passos abaixo:
 2. Clone o repositório do projeto:
 
 ```
-git clone https://github.com/liyuhi/SistemaGerenciamentoPedidosRestaurante
+git clone https://github.com/izalouyza/SistemaGerenciamentoPedidosRestaurante
 ```
 
 3. Acesse a pasta do projeto e siga até o diretório onde os códigos estão alocados:
