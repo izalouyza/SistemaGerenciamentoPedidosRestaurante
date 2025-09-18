@@ -2,6 +2,8 @@
 
 Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I. O projeto é destinado a desenvolver um sistema de gerenciamento de pedidos de restaurante. Dessa forma, este sistema terá como objetivo principal a gestão de pedidos e do cardápio de um restaurante, permitindo o controle eficiente dos pedidos e a administração dos itens disponíveis.
 
+![Linguagem](https://img.shields.io/badge/linguagem-C-blue)
+![Último commit](https://img.shields.io/github/last-commit/izalouyza/SistemaGerenciamentoPedidosRestaurante)
 ---
 ## 👨‍👧‍👧 Autores
 
