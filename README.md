@@ -54,14 +54,15 @@ O usuário terá acesso a uma interface interativa onde poderá visualizar as fu
 
 ```
 SistemaGerenciamentoPedidosRestaurante/
+src/
 │
-├── ManualdeUso/
+├── Manual/
 │   └── ManualdeUso.pdf
 │
 ├── Relatorio/
 │   └── Relatorio.pdf
 │
-├── gerenciamento-restaurante/
+├── Gerenciamento/
 │   ├── cardapio_pedidos/
 │   │   ├── cardapio.c
 │   │   ├── cardapio.h
@@ -160,7 +161,7 @@ cd SistemaGerenciamentoPedidosRestaurante
 ```
 
 ```
-cd gerenciamento-restaurante
+cd src/Gerenciamento
 ```
 
 ```
