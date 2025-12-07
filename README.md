@@ -8,9 +8,9 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I. O
 
 
 ---
-## 👨‍👧‍👧 Autores
+## Autores
 
-👨‍🏫 **Professor:** George Felipe Fernandes Vieira
+**Professor:** George Felipe Fernandes Vieira
 
 👩‍🎓 **Discentes:**  
 🔹 [Izadora Louyza Silva Figueiredo](https://github.com/izalouyza)  
