@@ -1,4 +1,6 @@
-# Sistema de Gerenciamento de Pedidos de Restaurante
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=FF7F50&height=200&section=header&text=Gerenciador%20de%20Pedidos&fontSize=40&fontColor=ffffff" />
+</p>
 
 Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados I. O projeto é destinado a desenvolver um sistema de gerenciamento de pedidos de restaurante. Dessa forma, este sistema terá como objetivo principal a gestão de pedidos e do cardápio de um restaurante, permitindo o controle eficiente dos pedidos e a administração dos itens disponíveis.
 
